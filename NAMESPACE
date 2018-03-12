@@ -1,0 +1,31 @@
+# last modified 20 Dic 13 by Carlos A Arias
+
+useDynLib(pcaPA, Cpolychoric)
+
+export("CalculatePABinary")
+export("CalculatePAContinuous")
+export("CalculatePAMixed")
+export("CalculatePAOrdered")
+export("Check.PA")
+export("coef.PA")
+export("CountEigen.PA")
+export("PA")
+export("plot.PA")
+export("print.PA")
+export("quantile.PA")
+
+S3method(print, PA)
+S3method(plot, PA)
+S3method(coef, PA)
+S3method(quantile, PA)
+
+import(
+ polycor,
+ ltm,
+ stats,
+ ggplot2,
+ mc2d,
+ sfsmisc
+)
+
+
