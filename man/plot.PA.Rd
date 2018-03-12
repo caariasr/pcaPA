@@ -9,7 +9,7 @@
 
 
 \usage{
-\method{plot}{PA}(x, percentiles = NULL, main = NULL, xlab = NULL, ylab = NULL,
+\method{plot}{PA}(x, percentiles = NULL, normalIntervals = NULL, main = NULL, xlab = NULL, ylab = NULL,
       groupLabel = NULL, colour = TRUE, linetype = TRUE, observed = "Observed",
       percentile = "th percentile", position = "after", sep = "", ...)
 }
@@ -17,6 +17,7 @@
 \arguments{
   \item{x}{an object of class \code{"PA"}.}
   \item{percentiles}{The percentiles that ought to be plotted. Defaults to those in the PA object.}
+  \item{normalIntervals}{If not NULL, a numeric giving the sample size to find the confidence intervals for each eigenvalue assuming normality and big sample size.}
   \item{main}{Graph title instead of default.}
   \item{xlab}{Label for \code{x} axis instead of default.}
   \item{ylab}{Label for \code{y} axis instead of default.}
@@ -33,7 +34,7 @@
   \code{ggplot} object for plotting the scree plot.
 }
 
-\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}} 
+\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}}
 
 \seealso{\code{\link{PA}}, \code{\link{print.PA}}, \code{\link{Check.PA}}, \code{\link{CountEigen.PA}}, \code{\link{coef.PA}}, \code{\link{quantile.PA}}}
 

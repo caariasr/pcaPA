@@ -9,7 +9,8 @@ CalculatePAContinuous <- function (dataMatrix, percentiles = 0.99, nReplicates =
   # #  dataMatrix: matrix or data.frame of continuous numeric variables
   # #  percentiles: vector of percentiles to report
   # #  nReplicates: number of simulations to produce for estimating the eigenvalues distribution under independence
-  # #  algorithm: string specifying the correlation estimation algorithm. Ignored but should specify "pearson".
+  # #  use: Missing value handling method: If "complete.obs", remove observations with any missing data; if "pairwise.complete.obs", compute each correlation using all observations with valid data for that pair of variables.
+  # #  algorithm: string specifying the matrix for which the PCA analysis is conducted. Covariance matrix: "cov", or correlation matrix: "pearson".
   # #
   # # Ret:
   # #  parallelList: a list with data.frames observed, percentiles and simulated data.
@@ -33,8 +34,14 @@ CalculatePAContinuous <- function (dataMatrix, percentiles = 0.99, nReplicates =
     stop("All variables in dataMatrix must be numeric")
   }
 
-  if (algorithm != "pearson") {
-    warning("Only Pearson correlations are used for continuous data.")
+  if (use %in% c("everything", "all.obs")) {
+    remUse <- FALSE
+  } else {
+    remUse <- TRUE
+  }
+
+  if ((algorithm != "cov") & (algorithm != "pearson")) {
+    warning("Only covariances or Pearson correlations are used for continuous data.\nUsing Pearson correlation.")
   }
 
   ################################################################################
@@ -42,7 +49,13 @@ CalculatePAContinuous <- function (dataMatrix, percentiles = 0.99, nReplicates =
   ################################################################################
   nObservations  <- nrow(dataMatrix)
   nVariables     <- ncol(dataMatrix)
-  datCorrelation <- cor(dataMatrix, use = use)
+  dataMeans      <- colMeans(dataMatrix, na.rm = remUse)
+  dataSds        <- apply(dataMatrix, 2, sd, na.rm = remUse)
+  if (algorithm == 'cov') {
+    datCorrelation <- cov(dataMatrix, use = use)
+  } else {
+    datCorrelation <- cor(dataMatrix, use = use)
+  }
   datEigenValues <- eigen(datCorrelation)$values
 
   observed <- data.frame(orderEigenValues = 1:nVariables,
@@ -58,7 +71,8 @@ CalculatePAContinuous <- function (dataMatrix, percentiles = 0.99, nReplicates =
   colnames(simulatedEigenValues) <- 1:nVariables
 
   for (ii in 1:nReplicates) {
-    simulatedData <- matrix(rnorm(nObservations * nVariables),
+    simulatedData <- matrix(rnorm(nObservations * nVariables,
+                                  mean = dataMeans, sd = dataSds),
                             ncol = nVariables, nrow = nObservations)
 
     simulatedEigenValues[ii, ] <- eigen(cor(simulatedData, use = use))$values
