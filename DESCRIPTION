@@ -4,7 +4,7 @@ Title: Parallel Analysis for Ordinal and Numeric Data using Polychoric
 Version: 2.0
 Date: 2016-09-14
 Author: Carlos A. Arias <caariasr22@gmail.com> and Victor H. Cervantes 
-        <Herulor@gmail.com>.
+        <herulor@gmail.com>.
 Maintainer: Carlos A. Arias <caariasr22@gmail.com>
 Depends: R (>= 3.3.1), polycor, ltm, stats, ggplot2, mc2d, sfsmisc
 Description: A set of functions to perform parallel analysis for

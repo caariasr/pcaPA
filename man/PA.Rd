@@ -52,7 +52,7 @@ retained number of components; also some missing observations may be handled by 
 }
 
 
-\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}}
+\author{Carlos A. Arias \email{caariasr22@gmail.com} and Victor H. Cervantes \email{herulor@gmail.com}}
 
 \note{The algorithm \code{"polychoric"} is only implemented for binary/dichotomous and ordered polytomous data. When
   mixed type data are used only \code{"polycor"} is currently available.}

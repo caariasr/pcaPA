@@ -25,10 +25,10 @@ CalculatePAContinuous(dataMatrix, percentiles = 0.99, nReplicates = 200,
   \item{percentiles}{\code{data.frame} containing the estimated percentiles of the eigenvalues distribution under
     independence.}
   \item{simulatedEigenValues}{\code{data.frame} containing the simulated eigenvalues under independence.}
-
+ 
 }
 
-\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}}
+\author{Carlos A. Arias \email{caariasr22@gmail.com} and Victor H. Cervantes \email{herulor@gmail.com}}
 
 \note{This is an auxiliary function for the \code{"PA"} function.}
 
