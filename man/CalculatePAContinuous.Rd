@@ -16,8 +16,8 @@ CalculatePAContinuous(dataMatrix, percentiles = 0.99, nReplicates = 200,
   \item{percentiles}{vector of percentiles to report.}
   \item{nReplicates}{number of simulations to produce for estimating the eigenvalues distribution under independence.}
   \item{use}{Missing value handling method: If \code{"complete.obs"}, remove observations with any missing data; if \code{"pairwise.complete.obs"}, compute each correlation using all observations with valid data for that pair of variables.}
-  \item{algorithm}{string specifying the estimation algorithm. In the case of continuous variables, only the Pearson
-    correlations are used. Ignored if different to \code{"pearson"}.}
+  \item{algorithm}{string specifying the estimation algorithm. In the case of continuous variables, only covariances or the Pearson
+    correlations are used. Ignored if different to either \code{"cov"} or \code{"pearson"}.}
 }
 \value{
   Returns a \code{list} object with the following:
@@ -28,7 +28,7 @@ CalculatePAContinuous(dataMatrix, percentiles = 0.99, nReplicates = 200,
  
 }
 
-\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}}
+\author{Carlos A. Arias \email{caariasr22@gmail.com} and Victor H. Cervantes \email{herulor@gmail.com}}
 
 \note{This is an auxiliary function for the \code{"PA"} function.}
 

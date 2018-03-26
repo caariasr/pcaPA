@@ -1,10 +1,11 @@
-plot.PA <- function (x, percentiles = NULL, main = NULL, xlab = NULL, ylab = NULL, groupLabel = NULL, colour = TRUE,
+plot.PA <- function (x, percentiles = NULL, normalIntervals = NULL, main = NULL, xlab = NULL, ylab = NULL, groupLabel = NULL, colour = TRUE,
                      linetype = TRUE, observed = "Observed", percentile = "th percentile", position = "after", sep = "", ...) {
   # # Plots the scree plot for a PA object for the selected percentiles
   # #
   # # Arg:
   # #  PA: an object of class PA
   # #  percentiles: The percentiles that ought to be plotted, defaults to those in the object
+  # #  normalIntervals: If not NULL, a numeric giving the sample size to find the confidence intervals for each eigenvalue assuming normality and big sample size.
   # #  main: Graph title instead of default
   # #  xlab: Label for x axis instead of default
   # #  ylab: Label for y axis instead of default
@@ -42,6 +43,11 @@ plot.PA <- function (x, percentiles = NULL, main = NULL, xlab = NULL, ylab = NUL
     stop("The lines must be distinguished by colour or linetype")
   }
 
+    if (!is.null(normalIntervals)) {
+        warning("Intervals for eigenvalues assume normally distributed random variables and large samples.")
+        alpha <- 1 - (max(as.numeric(x$percentiles[, "typeEigenValues"])) / 100)
+    }
+
   # # Label Control
   nVariables <- nrow(x$observed)
   x$observed[,"typeEigenValues"] <- factor(rep(observed,nVariables))
@@ -58,6 +64,18 @@ plot.PA <- function (x, percentiles = NULL, main = NULL, xlab = NULL, ylab = NUL
 
     # # Create the plot
     ggplotPA <- ggplot(PA, aes(x = orderEigenValues, y = eigenValues))
+
+    # # Add intervals
+    if (!is.null(normalIntervals)) {
+        x$observed[, 'lower'] <- x$observed[, "eigenValues"] / (1 - qnorm(alpha / (2 * nVariables)) * sqrt(2 / normalIntervals))
+        x$observed[, 'upper'] <- x$observed[, "eigenValues"] / (1 + qnorm(alpha / (2 * nVariables)) * sqrt(2 / normalIntervals))
+
+        ggplotPA <- ggplotPA + geom_errorbar(data = x$observed, width = 0.05,
+                                             aes(x = orderEigenValues, y = NULL, ymin = lower, ymax = eigenValues))
+        ggplotPA <- ggplotPA + geom_errorbar(data = x$observed, width = 0.05,
+                                             aes(x = orderEigenValues, y = NULL, ymax = upper, ymin = eigenValues))
+    }
+
     if (colour & linetype) {
       ggplotPA <- ggplotPA + geom_line(aes(colour = typeEigenValues, linetype = typeEigenValues))
     } else if (colour) {

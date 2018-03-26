@@ -19,7 +19,7 @@
 }
 
 
-\author{Carlos A. Arias \email{carias@icfes.gov.co} and Victor H. Cervantes \email{vcervantes@icfes.gov.co}} 
+\author{Carlos A. Arias \email{caariasr22@gmail.com} and Victor H. Cervantes \email{herulor@gmail.com}} 
 
 \seealso{\code{\link{PA}}, \code{\link{print.PA}}, \code{\link{Check.PA}}, \code{\link{CountEigen.PA}}, \code{\link{coef.PA}}, \code{\link{plot.PA}}}
 
