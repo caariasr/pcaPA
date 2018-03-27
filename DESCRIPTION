@@ -1,7 +1,7 @@
 Package: pcaPA
 Title: Parallel Analysis for Ordinal and Numeric Data using Polychoric
         and Pearson Correlations with S3 Classes
-Version: 2.0.2
+Version: 2.0.3
 Date: 2016-09-14
 Author: Carlos A. Arias <caariasr22@gmail.com> and Victor H. Cervantes 
         <herulor@gmail.com>.
@@ -22,7 +22,3 @@ Description: A set of functions to perform parallel analysis for
         based on a previous version developed at the Colombian Institute 
         for the evaluation of education - ICFES.
 License: GPL (>= 2)
-NeedsCompilation: yes
-Packaged: 2016-09-16 12:10:17 UTC; CarlosAndresArias
-Repository: CRAN
-Date/Publication: 2016-09-16 18:15:52

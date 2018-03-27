@@ -71,9 +71,11 @@ plot.PA <- function (x, percentiles = NULL, normalIntervals = NULL, main = NULL,
         x$observed[, 'upper'] <- x$observed[, "eigenValues"] / (1 + qnorm(alpha / (2 * nVariables)) * sqrt(2 / normalIntervals))
 
         ggplotPA <- ggplotPA + geom_errorbar(data = x$observed, width = 0.05,
-                                             aes(x = orderEigenValues, y = NULL, ymin = lower, ymax = eigenValues))
+                                             aes(x = orderEigenValues, y = NULL, ymin = x$observed$lower,
+                                                 ymax = x$observed$eigenValues))
         ggplotPA <- ggplotPA + geom_errorbar(data = x$observed, width = 0.05,
-                                             aes(x = orderEigenValues, y = NULL, ymax = upper, ymin = eigenValues))
+                                             aes(x = orderEigenValues, y = NULL, ymax = x$observed$lupper,
+                                                 ymin = x$observed$eigenValues))
     }
 
     if (colour & linetype) {
